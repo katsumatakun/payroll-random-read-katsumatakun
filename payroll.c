@@ -43,11 +43,11 @@ int main(int argc, char* argv[]) {
       printf("No more memory space available \n");
       return -1;
     }
-    printf("%s\n",q->first_name );
+
     p->biWeeklySalary = q->monthly_salary *12/26;
     p->fedTaxDeducted = p->biWeeklySalary * q->fed_tax_percent /100;
     p->stateTaxDeducted = p->biWeeklySalary * q->state_tax_percent /100;
-    p->medicalDeducted = p->biWeeklySalary * q->total_medical * 12/26;
+    p->medicalDeducted = q->total_medical * 12/26;
     p->netPay = p->biWeeklySalary - p->fedTaxDeducted - p->stateTaxDeducted - p->medicalDeducted;
 
     fwrite(q, sizeof(struct emp), 1, fpw);
