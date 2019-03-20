@@ -43,7 +43,7 @@ int main(int argc, char* argv[]) {
       printf("No more memory space available \n");
       return -1;
     }
-
+    printf("%s\n",q->first_name );
     p->biWeeklySalary = q->monthly_salary *12/26;
     p->fedTaxDeducted = p->biWeeklySalary * q->fed_tax_percent /100;
     p->stateTaxDeducted = p->biWeeklySalary * q->state_tax_percent /100;
@@ -61,6 +61,7 @@ int main(int argc, char* argv[]) {
 }
   free(q);
   fclose(fpw);
+  fclose(fpr);
 
   return 0;
 }
