@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "emp_rec.h"
+#include "print_calculated.h"
 
 
 int main(int argc, char* argv[]) {
@@ -27,8 +28,7 @@ int main(int argc, char* argv[]) {
         return -1;
       }
       if(fread(q, sizeof(struct emp), 1, fpr) && fread(p, sizeof(struct paydata), 1, fpr)){
-        printf("%s\n",q->first_name);
-        printf("%f\n",p->biWeeklySalary);
+        print_emp_data(q, p);
       }
       else{
         printf("There is no record for record%d\n", record_num);
