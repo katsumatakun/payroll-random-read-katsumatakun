@@ -21,7 +21,7 @@ int main(int argc, char* argv[]) {
     return -1;
   }
   FILE *fpw;
-  if((fpw = fopen(argv[1], "wb")) == NULL ) {
+  if((fpw = fopen(argv[2], "wb")) == NULL ) {
     printf("Output file not open\n");
     return -1;
   }
@@ -37,6 +37,12 @@ int main(int argc, char* argv[]) {
   pdataPtr p;
 
   while(fread(q, sizeof(struct emp), 1, fpr)){
+
+    p = (pdataPtr) malloc(sizeof(struct paydata));
+    if(p == NULL){
+      printf("No more memory space available \n");
+      return -1;
+    }
 
     p->biWeeklySalary = q->monthly_salary *12/26;
     p->fedTaxDeducted = p->biWeeklySalary * q->fed_tax_percent /100;
