@@ -19,15 +19,17 @@ int main(int argc, char* argv[]) {
     int record_num = strtol(argv[arg_num], &endp, 10);
     printf("%d\n", record_num);
     if (*endp == '\0'){
+      if((q = (empPtr) malloc(sizeof(struct emp))) == NULL || (p = (pdataPtr) malloc(sizeof(struct paydata)))== NULL){
+        printf("No more memory space available \n");
+        return -1;
+      }
+
       printf("Last name, First name  bi-weekly pay  federal tax  state tax  insurance     net pay \n");
       fseek(fpr, (sizeof(struct emp) + sizeof(struct paydata))*(abs(record_num)-1), SEEK_SET);
       if(record_num <= 0 && fpr != NULL){
         fseek(fpr, (sizeof(struct emp) + sizeof(struct paydata))*(record_num), SEEK_END);
       }
-      if((q = (empPtr) malloc(sizeof(struct emp))) == NULL || (p = (pdataPtr) malloc(sizeof(struct paydata)))== NULL){
-        printf("No more memory space available \n");
-        return -1;
-      }
+
       if(fread(q, sizeof(struct emp), 1, fpr) && fread(p, sizeof(struct paydata), 1, fpr)){
         print_emp_data(q, p);
       }
