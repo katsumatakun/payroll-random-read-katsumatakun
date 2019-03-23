@@ -4,10 +4,10 @@
 
 
 /*
-  This program reads a structured binary file of eployee records
-  that is unsorted and first print out all of the data for
-  each employee and then print out employee's bi-weekly net pay
-  and total payment in descending alphabetical order.
+  This program reads a structured binary file of employee records
+  and will create a new file of employee in wich employee's bi-weekly total pay,
+  net pay, amount of taxes and medical insruarence are written as well as
+  employee's raw data read from input flie.
 */
 int main(int argc, char* argv[]) {
 
@@ -21,14 +21,15 @@ int main(int argc, char* argv[]) {
     printf("Input file not open\n");
     return -1;
   }
+
   FILE *fpw;
   if((fpw = fopen(argv[2], "wb")) == NULL ) {
     printf("Output file not open\n");
     return -1;
   }
 
+  //magic number to check a format of file when it is read afterward.
   char magic_num[8] = "PAYOUT@#";
-
   fwrite(&magic_num, 8, 1, fpw);
 
   empPtr q;
@@ -37,8 +38,10 @@ int main(int argc, char* argv[]) {
     printf("No more memory space available \n");
     return -1;
   }
+
   pdataPtr p;
 
+  //while not EOF
   while(fread(q, sizeof(struct emp), 1, fpr)){
 
     p = (pdataPtr) malloc(sizeof(struct paydata));
@@ -47,6 +50,7 @@ int main(int argc, char* argv[]) {
       return -1;
     }
 
+    //calculated each data
     p->biWeeklySalary = q->monthly_salary *12/26;
     p->fedTaxDeducted = p->biWeeklySalary * q->fed_tax_percent /100;
     p->stateTaxDeducted = p->biWeeklySalary * q->state_tax_percent /100;
@@ -62,6 +66,7 @@ int main(int argc, char* argv[]) {
       return -1;
     }
 }
+  //deallocate extra memory
   free(q);
   fclose(fpw);
   fclose(fpr);
