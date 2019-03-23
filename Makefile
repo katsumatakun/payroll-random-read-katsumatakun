@@ -1,4 +1,5 @@
 
+# This is a Makefile for two programs, payroll and payget.
 
 all: payroll payget
 

@@ -4,6 +4,13 @@
 #include "emp_rec.h"
 #include "print_calculated.h"
 
+/*
+  This program reads a binary file created by payroll.c
+  containing employee's raw data and calculated payment data, also
+  takes integers as input, and displays employee's data which is
+  corresponded with the integers input, e.g. 2 means second record from the
+  beginning of the file and -2 means the second record from the end of file.
+*/
 
 int main(int argc, char* argv[]) {
 
@@ -13,10 +20,11 @@ int main(int argc, char* argv[]) {
       return -1;
     }
 
+    // magic number to verify that the input file was made by payroll.c
     char* magic_num = "PAYOUT@#";
     char* first_eight = (char*) malloc(8);
     fread(first_eight, 8, 1, fpr);
-    
+
     if(strcmp(magic_num, first_eight)){
       printf("Invaild File\n");
       return -1;
@@ -26,7 +34,10 @@ int main(int argc, char* argv[]) {
     pdataPtr p;
     char *endp;
     int arg_num = 2;
+
+    //header of the output
     printf("Last name, First name  bi-weekly pay  federal tax  state tax  insurance     net pay \n");
+
     while(arg_num != argc){
     int record_num = strtol(argv[arg_num], &endp, 10);
     if (*endp != '\0')
@@ -38,6 +49,7 @@ int main(int argc, char* argv[]) {
         return -1;
       }
 
+      //move file pointer based on the input integer 
       fseek(fpr, (sizeof(struct emp) + sizeof(struct paydata))*(abs(record_num)-1)+8, SEEK_SET);
       if(record_num <= 0 && fpr != NULL){
         fseek(fpr, (sizeof(struct emp) + sizeof(struct paydata))*(record_num), SEEK_END);
