@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include "emp_rec.h"
 
+
 /*
   This program reads a structured binary file of eployee records
   that is unsorted and first print out all of the data for
@@ -26,8 +27,10 @@ int main(int argc, char* argv[]) {
     return -1;
   }
 
-  //Allocate space for the first record while checking if there
-  //is memory space.
+  char magic_num[8] = "PAYOUT@#";
+
+  fwrite(&magic_num, 8, 1, fpw);
+
   empPtr q;
   q = (empPtr) malloc(sizeof(struct emp));
   if(q == NULL){
