@@ -30,7 +30,7 @@ int main(int argc, char* argv[]) {
 
   //magic number to check a format of file when it is read afterward.
   char magic_num[8] = "PAYOUT@#";
-  fwrite(&magic_num, 8, 1, fpw);
+  fwrite(magic_num, 8, 1, fpw);
 
   empPtr q;
   q = (empPtr) malloc(sizeof(struct emp));
