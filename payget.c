@@ -64,7 +64,7 @@ int main(int argc, char* argv[]) {
           print_emp_data(q, p);
         }
         else{
-          printf("There is no record for record%d\n", record_num);
+          printf("Out of range; there is no record for record%d\n", record_num);
         }
       }
     arg_num++;
