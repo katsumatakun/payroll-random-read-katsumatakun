@@ -18,5 +18,8 @@ payget.o: payget.c emp_rec.h print_calculated.h
 print_calculated.o: print_calculated.c print_calculated.h emp_rec.h
 	gcc -c print_calculated.c
 
+#change name of emp_recs.bin temporary to remove all binary files created by payroll
 clean:
-	rm -rf payroll payget *.o aa.bin
+	mv emp_recs.bin emp_recs.bin.keep
+	rm -rf payroll payget *.o *.bin
+	mv emp_recs.bin.keep emp_recs.bin
