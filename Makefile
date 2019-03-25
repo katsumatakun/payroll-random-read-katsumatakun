@@ -19,4 +19,4 @@ print_calculated.o: print_calculated.c print_calculated.h emp_rec.h
 	gcc -c print_calculated.c
 
 clean:
-	rm -rf payroll payget *.o new.bin
+	rm -rf payroll payget *.o aa.bin

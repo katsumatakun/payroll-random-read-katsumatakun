@@ -68,6 +68,7 @@ int main(int argc, char* argv[]) {
 }
   //deallocate extra memory
   free(q);
+
   fclose(fpw);
   fclose(fpr);
 

@@ -14,6 +14,11 @@
 
 int main(int argc, char* argv[]) {
 
+    if(argc < 3){
+      printf("usage: program name, file name, record number 1, record number 2, ... record number n \n");
+      return -1;
+    }
+
     FILE *fpr;
     if((fpr = fopen(argv[1], "rb")) == NULL ) {
       printf("Input file not open\n");
@@ -39,29 +44,29 @@ int main(int argc, char* argv[]) {
     printf("Last name, First name  bi-weekly pay  federal tax  state tax  insurance     net pay \n");
 
     while(arg_num != argc){
-    int record_num = strtol(argv[arg_num], &endp, 10);
-    if (*endp != '\0')
-      printf("Input value must be integer\n");
-    else
-    {
-      if((q = (empPtr) malloc(sizeof(struct emp))) == NULL || (p = (pdataPtr) malloc(sizeof(struct paydata)))== NULL){
-        printf("No more memory space available \n");
-        return -1;
-      }
+      int record_num = strtol(argv[arg_num], &endp, 10);
+      if (*endp != '\0')
+        printf("Input value must be integer\n");
+      else
+      {
+        if((q = (empPtr) malloc(sizeof(struct emp))) == NULL || (p = (pdataPtr) malloc(sizeof(struct paydata)))== NULL){
+          printf("No more memory space available \n");
+          return -1;
+        }
 
-      //move file pointer based on the input integer 
-      fseek(fpr, (sizeof(struct emp) + sizeof(struct paydata))*(abs(record_num)-1)+8, SEEK_SET);
-      if(record_num <= 0 && fpr != NULL){
-        fseek(fpr, (sizeof(struct emp) + sizeof(struct paydata))*(record_num), SEEK_END);
-      }
+        //move file pointer based on the input integer
+        fseek(fpr, (sizeof(struct emp) + sizeof(struct paydata))*(abs(record_num)-1)+8, SEEK_SET);
+        if(record_num <= 0 && fpr != NULL){
+          fseek(fpr, (sizeof(struct emp) + sizeof(struct paydata))*(record_num), SEEK_END);
+        }
 
-      if(fread(q, sizeof(struct emp), 1, fpr) && fread(p, sizeof(struct paydata), 1, fpr)){
-        print_emp_data(q, p);
+        if(fread(q, sizeof(struct emp), 1, fpr) && fread(p, sizeof(struct paydata), 1, fpr)){
+          print_emp_data(q, p);
+        }
+        else{
+          printf("There is no record for record%d\n", record_num);
+        }
       }
-      else{
-        printf("There is no record for record%d\n", record_num);
-      }
-    }
     arg_num++;
   }
 
