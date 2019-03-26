@@ -32,6 +32,7 @@ int main(int argc, char* argv[]) {
 
     if(strcmp(magic_num, first_eight)){
       printf("Invaild File\n");
+      fclose(fpr);
       return -1;
     }
 
@@ -48,6 +49,7 @@ int main(int argc, char* argv[]) {
       {
         if((q = (empPtr) malloc(sizeof(struct emp))) == NULL || (p = (pdataPtr) malloc(sizeof(struct paydata)))== NULL){
           printf("No more memory space available \n");
+          fclose(fpr);
           return -1;
         }
 
