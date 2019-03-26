@@ -40,9 +40,6 @@ int main(int argc, char* argv[]) {
     char *endp;
     int arg_num = 2;
 
-    //header of the output
-    printf("Last name, First name  bi-weekly pay  federal tax  state tax  insurance     net pay \n");
-
     while(arg_num != argc){
       int record_num = strtol(argv[arg_num], &endp, 10);
       if (*endp != '\0')
@@ -61,6 +58,7 @@ int main(int argc, char* argv[]) {
         }
 
         if(fread(q, sizeof(struct emp), 1, fpr) && fread(p, sizeof(struct paydata), 1, fpr)){
+          printf("record%d\n", record_num);
           print_emp_data(q, p);
         }
         else{
