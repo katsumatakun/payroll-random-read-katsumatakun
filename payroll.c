@@ -36,6 +36,8 @@ int main(int argc, char* argv[]) {
   q = (empPtr) malloc(sizeof(struct emp));
   if(q == NULL){
     printf("No more memory space available \n");
+    fclose(fpr);
+    fclose(fpw);
     return -1;
   }
 
@@ -47,6 +49,8 @@ int main(int argc, char* argv[]) {
     p = (pdataPtr) malloc(sizeof(struct paydata));
     if(p == NULL){
       printf("No more memory space available \n");
+      fclose(fpr);
+      fclose(fpw);
       return -1;
     }
 
@@ -63,6 +67,8 @@ int main(int argc, char* argv[]) {
     q = (empPtr) malloc(sizeof(struct emp));
     if(q == NULL){
       printf("No more memory space available \n");
+      fclose(fpr);
+      fclose(fpw);
       return -1;
     }
 }

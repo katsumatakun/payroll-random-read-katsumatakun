@@ -3,18 +3,18 @@
 # make will autimatically implement the programs and test cases
 all: payroll payget test
 
-test:
-	./payroll emp_recs.bin test.bin
-	./payget test.bin 1 2 3 4 5 6 7 8 9 10 11
-	./payget test.bin -1 -2 -3 -4 -5 -6 -7 -8 -9 -10 -11
-	./payget test.bin 0 12 28 -34 10 -1 9 2938 -7
-	./payget test.bin 1 www sxa @ -100 10 -5 9 8 -0
-
 payroll: payroll.o
 	gcc -o payroll payroll.o
 
 payget: payget.o print_calculated.o
 	gcc -o payget payget.o print_calculated.o
+
+test:
+	./payroll emp_recs.bin test.bin
+	./payget test.bin 1 2 3 4 5 6 7 8 9 10 11
+	./payget test.bin -1 -2 -3 -4 -5 -6 -7 -8 -9 -10 -11
+	./payget test.bin 0 12 28 -34 10 -1 9 2938 -7
+	./payget test.bin 1 www s @ -100 10 -5 9 8 -0
 
 payroll.o: payroll.c emp_rec.h
 	gcc -c payroll.c
