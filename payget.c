@@ -44,7 +44,7 @@ int main(int argc, char* argv[]) {
     while(arg_num != argc){
       int record_num = strtol(argv[arg_num], &endp, 10);
       if (*endp != '\0')
-        printf("Input value must be integer\n");
+        printf("Input value must be integer\n\n");
       else
       {
         if((q = (empPtr) malloc(sizeof(struct emp))) == NULL || (p = (pdataPtr) malloc(sizeof(struct paydata)))== NULL){
@@ -64,7 +64,7 @@ int main(int argc, char* argv[]) {
           print_emp_data(q, p);
         }
         else{
-          printf("Out of range; there is no record for record%d\n", record_num);
+          printf("Out of range; there is no record for record%d\n\n", record_num);
         }
       }
     arg_num++;
